@@ -3,6 +3,7 @@ from discord.ext import commands, tasks
 from discord.ext.commands.core import check
 from discord_together import DiscordTogether
 from decouple import config
+from discord_components import DiscordComponents, Button
 
 intents = discord.Intents.default()
 intents.members = True
@@ -40,7 +41,26 @@ def check_event(event):
         if option == event:
             return True
     return False
-            
+
+def get_btn(arg):
+    h_components = [
+        [
+            Button(style=5, label="Invite Me", url="https://discord.com/api/oauth2/authorize?client_id=917640198689546312&permissions=137492811072&scope=bot%20applications.commands"),
+            Button(style=1, label="Games List"),
+            Button(style=5, label="Support Server", url="https://discord.gg/7CYP8pKzDB") 
+        ],
+    ]
+    g_components = [
+        [
+            Button(style=5, label="Invite Me", url="https://discord.com/api/oauth2/authorize?client_id=917640198689546312&permissions=137492811072&scope=bot%20applications.commands"),
+            Button(style=5, label="Support Server", url="https://discord.gg/7CYP8pKzDB") 
+        ],
+    ]
+    if arg == "h":
+        return h_components
+    elif arg == "g":
+        return g_components
+
 def get_embed(game, user):
     embed = discord.Embed(
         description=f"{tick} Game created ~ `{DT_OPTIONS[game].capitalize()}`\n*Please click on the link to start the game so that others can join you.*",
@@ -56,6 +76,7 @@ def get_embed(game, user):
 async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.playing, name=f"Discord Together!"))
     client.togetherControl = await DiscordTogether(token)
+    DiscordComponents(client)
     print("DT online")
 
 @client.command()
@@ -72,19 +93,19 @@ async def games(ctx):
     emb.set_footer(
         text="Send ,start [prefix for game] to start a game"
     )
-    await ctx.send(embed=emb)
+    await ctx.send(embed=emb, components=get_btn("g"))
 
 @client.command()
 async def help(ctx):
     embed = discord.Embed(
-        description="Discord Together Bot allows you to access Games which are yet in Beta and play them with your friends!\n*Usage: `,start game_prefix` to start the game.*\n\n*Use `,games` to see the list of games available and their prefixes.*",
+        description="*Developed by ~ `[asheeshh#7727](https://discordapp.com/users/784363251940458516)` using `[discord-together](https://github.com/apurv-r/discord-together)`*\n\nDiscord Together Bot allows you to access Games which are yet in Beta and play them with your friends!\n*Usage: `,start game_prefix` to start the game.*\n\n*Use `,games` to see the list of games available and their prefixes.*",
         colour=0xffb0cd
     )
     embed.set_author(
         name="Need Help?",
         icon_url=ctx.author.avatar_url
     )
-    await ctx.send(embed=embed)
+    await ctx.send(embed=embed, components=get_btn("h"))
 
 @client.command()
 async def start(ctx, *, option=None):
@@ -103,5 +124,21 @@ async def start(ctx, *, option=None):
             embed = discord.Embed(description=f"{cross} No game found! Please send `,games` to check all the games available.", colour=0xffb0cd)
             await ctx.send(embed = embed)
 
+@client.event
+async def on_button_click(interaction):
+    desc = "> `1. ` ~ `YouTube Together` ~ `yt`\n> `2. ` ~ `Doodle Crew` ~ `dc`\n> `3. ` ~ `Poker` ~ `pr`\n> `4. ` ~ `Betrayal.io` ~ `bt`\n> `5. ` ~ `Fishington.io` ~ `fh`\n> `6. ` ~ `Chess` ~ `cs`\n> `7. ` ~ `Letter Tile` ~ `lt`\n> `8. ` ~ `Word Snack` ~ `ws`\n> `9. ` ~ `Spell Cast` ~ `sc`\n> `10.` ~ `AwkWord` ~ `aw`\n> `11.` ~ `Checkers` ~ `ck`\n"
+    emb = discord.Embed(
+        description=desc,
+        colour=0xffb0cd
+    )
+    emb.set_author(
+        name="Game List",
+        icon_url=interaction.user.avatar_url
+    )
+    emb.set_footer(
+        text="Send ,start [prefix for game] to start a game"
+    )
+    if interaction.component.label.lower() == "games list":
+        await interaction.respond(type=4, embed=emb)
 
 client.run(token)
