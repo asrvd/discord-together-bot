@@ -98,7 +98,7 @@ async def games(ctx):
 @client.command()
 async def help(ctx):
     embed = discord.Embed(
-        description="*Developed by ~ `[asheeshh#7727](https://discordapp.com/users/784363251940458516)` using `[discord-together](https://github.com/apurv-r/discord-together)`*\n\nDiscord Together Bot allows you to access Games which are yet in Beta and play them with your friends!\n*Usage: `,start game_prefix` to start the game.*\n\n*Use `,games` to see the list of games available and their prefixes.*",
+        description="*Developed by ~ [`asheeshh#7727`](https://discordapp.com/users/784363251940458516) using [`discord-together`](https://github.com/apurv-r/discord-together)*\n\nDiscord Together Bot allows you to access Games which are yet in Beta and play them with your friends!\n*Usage: `,start game_prefix` to start the game.*\n\n*Use `,games` to see the list of games available and their prefixes.*",
         colour=0xffb0cd
     )
     embed.set_author(
