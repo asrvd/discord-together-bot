@@ -79,7 +79,7 @@ def get_btn(arg, link=None):
     ]
     s_components = [
         [
-            Button(style=5, label="Start Game", url=link, emoji=discord.PartialEmoji(name="blue_tick", id="918000693531508757")),
+            Button(style=5, label="Start/Join Game", url=link, emoji=discord.PartialEmoji(name="blue_tick", id="918000693531508757")),
             Button(style=5, label="Invite Me", url="https://discord.com/api/oauth2/authorize?client_id=917640198689546312&permissions=137492811072&scope=bot%20applications.commands", emoji=discord.PartialEmoji(name="invite", id="918000296775520318")),
             Button(style=5, label="Support Server", url="https://discord.gg/7CYP8pKzDB", emoji=discord.PartialEmoji(name="support", id="918006066388795392")) 
         ],
