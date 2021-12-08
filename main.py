@@ -76,7 +76,7 @@ def get_btn(arg, link=None):
 
 def get_embed(game, user):
     embed = discord.Embed(
-        description=f"{tick} Game created ~ `{DT_OPTIONS[game].capitalize()}`\n*Please click on the link to start the game so that others can join you.*",
+        description=f"{tick} Game created ~ `{DT_OPTIONS[game].capitalize()}`\n*Please click on the `Start Game` button below to start the game so that others can join you.*",
         color=0xffb0cd
     )
     embed.set_author(
