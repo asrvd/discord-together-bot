@@ -38,6 +38,23 @@ DT_OPTIONS = {
     "ck" : "checkers"
 }
 
+DT_NAMES = {
+    "yt" : "YouTube",
+    "ytd": "YouTube Dev",
+    "sa" : "Sketchy Artist",
+    "pp" : "PuttyParty",
+    "dc" : "Doodle Crew",
+    "pr" : "Poker Night",
+    "bt" : "Betrayal.io",
+    "fh" : "Fishington.io",
+    "cs" : "Chess",
+    "lt" : "Letter Tile",
+    "ws" : "Word Snack",
+    "sc" : "SpellCast",
+    "aw" : "AwkWord",
+    "ck" : "Checkers"
+}
+
 print(">> DT is awaking...")
 
 def check_event(event):
@@ -76,11 +93,11 @@ def get_btn(arg, link=None):
 
 def get_embed(game, user):
     embed = discord.Embed(
-        description=f"{tick} Game created ~ `{DT_OPTIONS[game].capitalize()}`\n*Please click on the `Start Game` button below to start the game so that others can join you.*",
+        description=f"{tick} Game created ~ `{DT_NAMES[game]}`\n*Please click on the `Start Game` button below to start the game so that others can join you.*",
         color=0xffb0cd
     )
     embed.set_author(
-        name=f"Join {user.name} for {DT_OPTIONS[game].capitalize()}!",
+        name=f"Join {user.name} for {DT_NAMES[game]}!",
         icon_url = user.avatar_url
     )
     return embed
