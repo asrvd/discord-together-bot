@@ -1,3 +1,4 @@
+from typing import Optional
 import discord
 from discord.ext import commands, tasks
 from discord.ext.commands.core import check
@@ -22,6 +23,9 @@ client.remove_command("help")
 
 DT_OPTIONS = {
     "yt" : "youtube",
+    "ytd": "880218832743055411",
+    "sa" : "879864070101172255",
+    "pp" : "763133495793942528",
     "dc" : "doodle-crew",
     "pr" : "poker",
     "bt" : "betrayal",
@@ -42,24 +46,33 @@ def check_event(event):
             return True
     return False
 
-def get_btn(arg):
+def get_btn(arg, link=None):
     h_components = [
         [
-            Button(style=5, label="Invite Me", url="https://discord.com/api/oauth2/authorize?client_id=917640198689546312&permissions=137492811072&scope=bot%20applications.commands"),
-            Button(style=1, label="Games List"),
-            Button(style=5, label="Support Server", url="https://discord.gg/7CYP8pKzDB") 
+            Button(style=5, label="Invite Me", url="https://discord.com/api/oauth2/authorize?client_id=917640198689546312&permissions=137492811072&scope=bot%20applications.commands", emoji=discord.PartialEmoji(name="invite", id="918000296775520318")),
+            Button(style=1, label="Games List", emoji=discord.PartialEmoji(name="list", id="918000306128814130")),
+            Button(style=5, label="Support Server", url="https://discord.gg/7CYP8pKzDB", emoji=discord.PartialEmoji(name="support", id="918006066388795392"))
         ],
     ]
     g_components = [
         [
-            Button(style=5, label="Invite Me", url="https://discord.com/api/oauth2/authorize?client_id=917640198689546312&permissions=137492811072&scope=bot%20applications.commands"),
-            Button(style=5, label="Support Server", url="https://discord.gg/7CYP8pKzDB") 
+            Button(style=5, label="Invite Me", url="https://discord.com/api/oauth2/authorize?client_id=917640198689546312&permissions=137492811072&scope=bot%20applications.commands", emoji=discord.PartialEmoji(name="invite", id="918000296775520318")),
+            Button(style=5, label="Support Server", url="https://discord.gg/7CYP8pKzDB", emoji=discord.PartialEmoji(name="support", id="918006066388795392")) 
+        ],
+    ]
+    s_components = [
+        [
+            Button(style=5, label="Start Game", url=link, emoji=discord.PartialEmoji(name="blue_tick", id="918000693531508757")),
+            Button(style=5, label="Invite Me", url="https://discord.com/api/oauth2/authorize?client_id=917640198689546312&permissions=137492811072&scope=bot%20applications.commands", emoji=discord.PartialEmoji(name="invite", id="918000296775520318")),
+            Button(style=5, label="Support Server", url="https://discord.gg/7CYP8pKzDB", emoji=discord.PartialEmoji(name="support", id="918006066388795392")) 
         ],
     ]
     if arg == "h":
         return h_components
     elif arg == "g":
         return g_components
+    elif arg == "s":
+        return s_components
 
 def get_embed(game, user):
     embed = discord.Embed(
@@ -81,7 +94,7 @@ async def on_ready():
 
 @client.command()
 async def games(ctx):
-    desc = "> `1. ` ~ `YouTube Together` ~ `yt`\n> `2. ` ~ `Doodle Crew` ~ `dc`\n> `3. ` ~ `Poker` ~ `pr`\n> `4. ` ~ `Betrayal.io` ~ `bt`\n> `5. ` ~ `Fishington.io` ~ `fh`\n> `6. ` ~ `Chess` ~ `cs`\n> `7. ` ~ `Letter Tile` ~ `lt`\n> `8. ` ~ `Word Snack` ~ `ws`\n> `9. ` ~ `Spell Cast` ~ `sc`\n> `10.` ~ `AwkWord` ~ `aw`\n> `11.` ~ `Checkers` ~ `ck`\n"
+    desc = "> `1. ` ~ `YouTube Together      ` ~ `yt`\n> `2. ` ~ `YouTube Together (Dev)` ~ `ytd`\n> `3. ` ~ `Sketchy Artist        ` ~ `sa`\n> `4. ` ~ `Putt Party            ` ~ `pp`\n> `5. ` ~ `Doodle Crew           ` ~ `dc`\n> `6. ` ~ `Poker Night           ` ~ `pr`\n> `7. ` ~ `Betrayal.io           ` ~ `bt`\n> `8. ` ~ `Fishington.io         ` ~ `fh`\n> `9. ` ~ `Chess                 ` ~ `cs`\n> `10.` ~ `Letter Tile           ` ~ `lt`\n> `11.` ~ `Word Snack             ` ~ `ws`\n> `12.` ~ `Spell Cast            ` ~ `sc`\n> `13.` ~ `AwkWord               ` ~ `aw`\n> `14.` ~ `Checkers              ` ~ `ck`\n"
     emb = discord.Embed(
         description=desc,
         colour=0xffb0cd
@@ -119,7 +132,7 @@ async def start(ctx, *, option=None):
         if option is not None and check_event(option):
             link = await client.togetherControl.create_link(ctx.author.voice.channel.id, f'{DT_OPTIONS[option]}')
             emb = get_embed(option, ctx.author)
-            await ctx.send(f"Click on the link to get started!\n{link}", embed=emb)
+            await ctx.send(f"Click on the `Start Game` button below to get started!", embed=emb, components=get_btn("s", link))
         elif option is not None and not check_event(option):
             embed = discord.Embed(description=f"{cross} No game found! Please send `,games` to check all the games available.", colour=0xffb0cd)
             await ctx.send(embed = embed)
