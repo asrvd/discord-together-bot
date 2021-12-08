@@ -111,7 +111,7 @@ async def on_ready():
 
 @client.command()
 async def games(ctx):
-    desc = "> `1. ` ~ `YouTube Together      ` ~ `yt`\n> `2. ` ~ `YouTube Together (Dev)` ~ `ytd`\n> `3. ` ~ `Sketchy Artist        ` ~ `sa`\n> `4. ` ~ `Putt Party            ` ~ `pp`\n> `5. ` ~ `Doodle Crew           ` ~ `dc`\n> `6. ` ~ `Poker Night           ` ~ `pr`\n> `7. ` ~ `Betrayal.io           ` ~ `bt`\n> `8. ` ~ `Fishington.io         ` ~ `fh`\n> `9. ` ~ `Chess                 ` ~ `cs`\n> `10.` ~ `Letter Tile           ` ~ `lt`\n> `11.` ~ `Word Snack             ` ~ `ws`\n> `12.` ~ `Spell Cast            ` ~ `sc`\n> `13.` ~ `AwkWord               ` ~ `aw`\n> `14.` ~ `Checkers              ` ~ `ck`\n"
+    desc = "> `1. ` ~ `YouTube Together      ` ~ `yt`\n> `2. ` ~ `YouTube Together (Dev)` ~ `ytd`\n> `3. ` ~ `Sketchy Artist        ` ~ `sa`\n> `4. ` ~ `Putt Party            ` ~ `pp`\n> `5. ` ~ `Doodle Crew           ` ~ `dc`\n> `6. ` ~ `Poker Night           ` ~ `pr`\n> `7. ` ~ `Betrayal.io           ` ~ `bt`\n> `8. ` ~ `Fishington.io         ` ~ `fh`\n> `9. ` ~ `Chess                 ` ~ `cs`\n> `10.` ~ `Letter Tile           ` ~ `lt`\n> `11.` ~ `Word Snack            ` ~ `ws`\n> `12.` ~ `Spell Cast            ` ~ `sc`\n> `13.` ~ `AwkWord               ` ~ `aw`\n> `14.` ~ `Checkers              ` ~ `ck`\n"
     emb = discord.Embed(
         description=desc,
         colour=0xffb0cd
