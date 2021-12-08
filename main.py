@@ -149,7 +149,7 @@ async def start(ctx, *, option=None):
         if option is not None and check_event(option):
             link = await client.togetherControl.create_link(ctx.author.voice.channel.id, f'{DT_OPTIONS[option]}')
             emb = get_embed(option, ctx.author)
-            await ctx.send(f"Click on the `Start Game` button below to get started!", embed=emb, components=get_btn("s", link))
+            await ctx.send(f"Click on the `Start Game` button or click on the `link` below to get started!\n*{link}*", embed=emb, components=get_btn("s", link))
         elif option is not None and not check_event(option):
             embed = discord.Embed(description=f"{cross} No game found! Please send `,games` to check all the games available.", colour=0xffb0cd)
             await ctx.send(embed = embed)
